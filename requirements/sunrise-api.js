@@ -16,7 +16,7 @@ class sunriseApi {
      * @param {array object} params
      */
     sendRequest(params) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function(resolve, reject) {
             let qs = require('qs');
             let https = require('https');
             let baseUrl = _this.url;
@@ -24,17 +24,17 @@ class sunriseApi {
             https.get(baseUrl, function(response) {
                 let body = '';
                 response.on('data', function(chunk) {
-                  body += chunk  
+                    body += chunk
                 })
-                response.on('end', function(){
+                response.on('end', function() {
                     sunrise_logs.info("=================");
                     sunrise_logs.info("---URL---");
                     sunrise_logs.info(baseUrl);
                     sunrise_logs.info("---REQUESTED DATA---");
                     sunrise_logs.info(params);
-                    try{
+                    try {
                         body = JSON.parse(body);
-                        if(body.status != "OK"){
+                        if (body.status != "OK") {
                             sunrise_logs.info("---ERROR---");
                             sunrise_logs.info(body);
                             reject(body);
@@ -43,7 +43,7 @@ class sunriseApi {
                             sunrise_logs.info(body);
                             resolve(body);
                         }
-                    } catch(error){
+                    } catch (error) {
                         sunrise_logs.info("---CATCH ERROR---");
                         sunrise_logs.info(error);
                         reject(error);
@@ -58,16 +58,16 @@ class sunriseApi {
      * @param {float} lat
      * @param {float} lng
      */
-    getSunRiseData(lat,lng){
-        return new Promise(async function (resolve, reject) {
+    getSunRiseData(lat, lng) {
+        return new Promise(async function(resolve, reject) {
             let params = {
-                lat:lat,
-                lng:lng
+                lat: lat,
+                lng: lng
             };
-            try{
+            try {
                 let response = await _this.sendRequest(params);
                 resolve(response);
-            } catch(error){
+            } catch (error) {
                 reject(error);
             }
         });
