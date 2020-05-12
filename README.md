@@ -1,5 +1,10 @@
 # day-length
 
+```
+git clone https://github.com/devangbhagdev/day-length.git
+cd day-length
+```
+
 ### With node js
 
 ```
